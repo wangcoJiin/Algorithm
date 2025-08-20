@@ -1,51 +1,47 @@
 import java.util.Scanner;
- 
+
 public class Main {
-	
-	static int[] seq;
-	static Integer[] dp;
-	
-	public static void main(String[] args) {
-		
-		Scanner in = new Scanner(System.in);
-		
-		int N = in.nextInt();
-		
-		seq = new int[N];
-		dp = new Integer[N];
-		
-		
-		for(int i = 0; i < N; i++) {
-			seq[i] = in.nextInt();
-		}
-		
-		// 0 ~ N-1 까지 모든 부분수열 탐색 
-		for(int i = 0; i < N; i++) {
-			LIS(i);
-		}
-		
-		int max = dp[0];
-		// 최댓값 찾기 
-		for(int i = 1; i < N; i++) {
-			max = Math.max(max, dp[i]);
-		}
-		System.out.println(max);
-	}
-	
-	
-	static int LIS(int N) {
-		
-		// 만약 탐색하지 않던 위치의 경우 
-		if(dp[N] == null) {
-			dp[N] = 1;	// 1로 초기화 
-			
-			// N-1 부터 0까지중 N보다 작은 값들을 찾으면서 재귀호출. 
-			for(int i = N - 1; i >= 0; i--) {
-				if(seq[i] < seq[N]) {
-					dp[N] = Math.max(dp[N], LIS(i) + 1);
-				}
-			}
-		}
-		return dp[N];
-	}
+
+    static int[] seq;
+    static Integer[] dp;
+
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        int i;
+        int size = sc.nextInt();
+
+        seq = new int[size];
+        dp = new Integer[size];
+
+        for (i = 0 ; i < size ; i ++) {
+            seq[i] = sc.nextInt();
+        }
+
+        int max = 0;
+
+        // dp 중에 가장 큰 값 구하기
+        for (i = 0 ; i < size ; i ++) {
+            max = Math.max(max, LIS(i));
+        }
+
+        System.out.println(max);
+    }
+
+    private static int LIS(int n) {
+        // 만약 dp[n]에 아무 값도 없다면? (무조건 자기 자신은 포함되므로 1은 보장)
+        if (dp[n] == null) {
+            dp[n] = 1;
+
+            for(int i = 0 ; i < n ; i ++ ) {
+
+                // 만약 배열[n]보다 작은 값이 나온다면?
+                if (seq[i] < seq[n]) {
+                    dp[n] = Math.max(dp[n], LIS(i) + 1);
+                }
+            }
+        }
+
+        return dp[n];
+    }
 }
