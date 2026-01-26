@@ -26,10 +26,12 @@ class Solution {
             result.put(name, 0);
         }
 
+        // 이익 계산
         for (int i = 0 ; i < seller.length ; i ++) {
             calcu(seller[i], amount[i] * 100);
         }
-        
+
+        // 결과 리스트에 저장
         for (int i = 0 ; i < enroll.length ; i ++) {
             answer.add(result.get(enroll[i]));
         }
