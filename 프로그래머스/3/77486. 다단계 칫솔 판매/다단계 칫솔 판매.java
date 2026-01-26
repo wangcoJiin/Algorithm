@@ -4,15 +4,12 @@ class Solution {
     
     // 관계 해시맵
     static HashMap<String, String> rela = new HashMap<>();
-    // seller 맵
-    static HashMap<String, Integer> sell = new HashMap<>();
     // 이익 맵
     static HashMap<String, Integer> result = new HashMap<>();
 
     public int[] solution(String[] enroll, String[] referral, String[] seller, int[] amount) {
         
         rela.clear();
-        sell.clear();
         result.clear();
         
         List<Integer> answer = new ArrayList<>();
@@ -21,16 +18,6 @@ class Solution {
         for (int i = 0 ; i < enroll.length ; i ++) {
             if (!referral[i].equals("-")) {
                 rela.put(enroll[i], referral[i]);
-            }
-        }
-
-        // 판매 해시맵 데이터 설정
-        for (int i = 0 ; i < seller.length ; i ++) {
-            if (!sell.containsKey(seller[i])) {
-                sell.put(seller[i], amount[i] * 100);
-            }
-            else {
-                sell.put(seller[i], sell.get(seller[i]) + amount[i] * 100);
             }
         }
 
